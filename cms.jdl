@@ -1,0 +1,121 @@
+application {
+  // https://www.jhipster.tech/jdl/applications#available-application-configuration-options
+  config {
+    applicationType monolith
+    authenticationType jwt
+    baseName lxmcms
+    serverPort 8089
+    buildTool maven
+    cacheProvider ehcache
+    clientFramework react
+    clientPackageManager yarn
+    // clientTheme
+    // clientThemeVariant
+    databaseType sql
+    devDatabaseType h2Disk
+    enableHibernateCache true
+    enableSwaggerCodegen false
+    enableTranslation true
+    // entitySuffix    
+    packageName com.lexiangmiao.cms
+    prodDatabaseType mysql 
+    testFrameworks []
+    dtoSuffix Dto
+    jhiPrefix lxm
+    nativeLanguage zh-cn
+    languages [zh-cn,en]
+  }
+  entities Resource,Employee,Category,StaticPage,Post
+  // 参考 https://www.jhipster.tech/cn/jdl/options
+  filter StaticPage,Post
+  // 选了mapstruct会生成Mapper,DTO,连带生成serviceClass
+  dto Category,StaticPage,Post with mapstruct
+  // service LeadInfo with serviceClass
+  service StaticPage,Post with serviceImpl
+  paginate StaticPage,Post with pagination //pagination, infinite-scroll, no 分别分页，无限滚动和不分页，不指定为no
+  // paginate LeadInfo with infinite-scroll
+}
+
+// The Employee entity.
+/** 员工 */
+entity Employee {
+  /** 职务  */
+  title String maxlength(50)
+  /** 昵称 */
+  nickName String
+}
+
+
+// The Action entity.
+/** 资源权限 */
+@readonly
+@EntityAuthority(ROLE_ADMIN)
+entity Resource  {
+  /** 资原名 */
+  name String maxlength(0) maxlength(100)  
+  /** 权限 */
+  permission String
+}
+
+/** 栏目 */
+entity Category {
+  /** 分类名 */
+  name String maxlength(100) 
+  /** 描述 */
+  contentType String maxlength(255)
+  /** 排序 */
+  sort Integer
+}
+
+/** 页面 */
+entity StaticPage {
+  /** 标题 */
+  title String maxlength(255) 
+  /** 内容 */
+  content TextBlob
+  /** 状态 */
+  status String maxlength(100)
+}
+
+/** 文章 */
+entity Post {
+  /** 标题 */
+  title String maxlength(255) 
+  /** 内容 */
+  content TextBlob
+  /** 状态 */
+  status String maxlength(100)
+}
+
+// /** 标签 */
+// entity Tag {
+//   /** 标签名 */
+//   name String maxlength(100)
+// }
+
+
+/**
+ * One to one relationship.
+ */
+relationship OneToOne {
+  // @Id 生成派生标识符，表示依赖于父实体User；with builtInEntity 内建实体
+  /** 登录用户 */
+	Employee{user(login)} to @OnDelete("CASCADE") @Id User with builtInEntity
+}
+
+relationship ManyToOne {
+  /** 角色 */
+  Resource{authority(name)} to Authority with builtInEntity
+}
+
+relationship ManyToOne {
+  /** 汇报 */
+  Employee{reportsTo(nickName)} to Employee
+  
+  /** 父栏目 */
+  Category{parent(name)} to Category
+  /** 栏目 */
+  StaticPage{category(name)} to Category
+  /** 栏目 */
+  Post{category(name)} to Category
+}
