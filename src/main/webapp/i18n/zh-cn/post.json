@@ -1,0 +1,33 @@
+{
+  "lxmcmsApp": {
+    "post": {
+      "home": {
+        "title": "文章",
+        "refreshListLabel": "刷新列表",
+        "createLabel": "创建新文章",
+        "createOrEditLabel": "创建或编辑文章",
+        "notFound": "未找到文章"
+      },
+      "created": "文章{{ param }}创建成功",
+      "updated": "文章{{ param }}更新成功",
+      "deleted": "文章{{ param }}删除成功",
+      "delete": {
+        "question": "你确定要删除文章{{ id }}吗？"
+      },
+      "detail": {
+        "title": "文章"
+      },
+      "id": "ID",
+      "title": "标题",
+      "content": "内容",
+      "status": "状态",
+      "category": "栏目",
+      "help": {
+        "title": "标题",
+        "content": "内容",
+        "status": "状态",
+        "category": "栏目"
+      }
+    }
+  }
+}

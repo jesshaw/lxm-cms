@@ -1,0 +1,45 @@
+{
+  "annotations": {
+    "changelogDate": "20241225115930"
+  },
+  "applications": ["lxmcms"],
+  "documentation": "页面",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "documentation": "标题",
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "255"
+    },
+    {
+      "documentation": "内容",
+      "fieldName": "content",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "documentation": "状态",
+      "fieldName": "status",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "100"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "StaticPage",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "documentation": "栏目",
+      "otherEntityField": "name",
+      "otherEntityName": "category",
+      "relationshipName": "category",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

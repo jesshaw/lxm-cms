@@ -1,0 +1,33 @@
+{
+  "lxmcmsApp": {
+    "staticPage": {
+      "home": {
+        "title": "页面",
+        "refreshListLabel": "刷新列表",
+        "createLabel": "创建新页面",
+        "createOrEditLabel": "创建或编辑页面",
+        "notFound": "未找到页面"
+      },
+      "created": "页面{{ param }}创建成功",
+      "updated": "页面{{ param }}更新成功",
+      "deleted": "页面{{ param }}删除成功",
+      "delete": {
+        "question": "你确定要删除页面{{ id }}吗？"
+      },
+      "detail": {
+        "title": "页面"
+      },
+      "id": "ID",
+      "title": "标题",
+      "content": "内容",
+      "status": "状态",
+      "category": "栏目",
+      "help": {
+        "title": "标题",
+        "content": "内容",
+        "status": "状态",
+        "category": "栏目"
+      }
+    }
+  }
+}

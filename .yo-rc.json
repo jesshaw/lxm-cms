@@ -1,0 +1,37 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 0,
+    "applicationType": "monolith",
+    "authenticationType": "jwt",
+    "baseName": "lxmcms",
+    "blueprints": [
+      {
+        "name": "generator-jhipster-chimera",
+        "version": "1.4.2"
+      }
+    ],
+    "buildTool": "maven",
+    "cacheProvider": "ehcache",
+    "clientFramework": "react",
+    "clientPackageManager": "yarn",
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "devServerPort": 9060,
+    "dtoSuffix": "Dto",
+    "enableHibernateCache": true,
+    "enableSwaggerCodegen": false,
+    "enableTranslation": true,
+    "entities": ["Resource", "Employee", "Category", "StaticPage", "Post"],
+    "jhiPrefix": "lxm",
+    "jhipsterVersion": "8.3.0",
+    "jwtSecretKey": "ZTUzNzNiMTA5N2MwZmQ3NjA5NTE2MTdlNWQyMWZlMGQ3YzExMDcyNDE2ZGY2NGYyNGZiNDBmYjU0MmU2MzZiMDViNzdiZjJjMjYzZjliMWVkNzM3OWI2OTE3MmVhNWIyMmNkN2MwYjhiMGQ5YzEyOWYzZjliNGY5MTZlMDg4YWY=",
+    "languages": ["zh-cn", "en"],
+    "lastLiquibaseTimestamp": 1735128030000,
+    "nativeLanguage": "zh-cn",
+    "packageFolder": "com/lexiangmiao/cms",
+    "packageName": "com.lexiangmiao.cms",
+    "prodDatabaseType": "mysql",
+    "serverPort": "8089",
+    "testFrameworks": []
+  }
+}

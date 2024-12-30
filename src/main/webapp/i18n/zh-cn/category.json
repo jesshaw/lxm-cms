@@ -1,0 +1,33 @@
+{
+  "lxmcmsApp": {
+    "category": {
+      "home": {
+        "title": "栏目",
+        "refreshListLabel": "刷新列表",
+        "createLabel": "创建新栏目",
+        "createOrEditLabel": "创建或编辑栏目",
+        "notFound": "未找到栏目"
+      },
+      "created": "栏目{{ param }}创建成功",
+      "updated": "栏目{{ param }}更新成功",
+      "deleted": "栏目{{ param }}删除成功",
+      "delete": {
+        "question": "你确定要删除栏目{{ id }}吗？"
+      },
+      "detail": {
+        "title": "栏目"
+      },
+      "id": "ID",
+      "name": "分类名",
+      "contentType": "描述",
+      "sort": "排序",
+      "parent": "父栏目",
+      "help": {
+        "name": "分类名",
+        "contentType": "描述",
+        "sort": "排序",
+        "parent": "父栏目"
+      }
+    }
+  }
+}

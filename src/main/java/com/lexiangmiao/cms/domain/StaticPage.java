@@ -1,0 +1,150 @@
+package com.lexiangmiao.cms.domain;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import java.io.Serializable;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+/**
+ * 页面
+ */
+@Entity
+@Table(name = "static_page")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@SuppressWarnings("common-java:DuplicatedBlocks")
+public class StaticPage implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    /**
+     * 标题
+     */
+    @Size(max = 255)
+    @Column(name = "title", length = 255)
+    private String title;
+
+    /**
+     * 内容
+     */
+    @Lob
+    @Column(name = "content")
+    private String content;
+
+    /**
+     * 状态
+     */
+    @Size(max = 100)
+    @Column(name = "status", length = 100)
+    private String status;
+
+    /**
+     * 栏目
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "parent" }, allowSetters = true)
+    private Category category;
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public StaticPage id(Long id) {
+        this.setId(id);
+        return this;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public StaticPage title(String title) {
+        this.setTitle(title);
+        return this;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return this.content;
+    }
+
+    public StaticPage content(String content) {
+        this.setContent(content);
+        return this;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public StaticPage status(String status) {
+        this.setStatus(status);
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Category getCategory() {
+        return this.category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public StaticPage category(Category category) {
+        this.setCategory(category);
+        return this;
+    }
+
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof StaticPage)) {
+            return false;
+        }
+        return getId() != null && getId().equals(((StaticPage) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        return getClass().hashCode();
+    }
+
+    // prettier-ignore
+    @Override
+    public String toString() {
+        return "StaticPage{" +
+            "id=" + getId() +
+            ", title='" + getTitle() + "'" +
+            ", content='" + getContent() + "'" +
+            ", status='" + getStatus() + "'" +
+            "}";
+    }
+}

@@ -1,0 +1,33 @@
+{
+  "lxmcmsApp": {
+    "staticPage": {
+      "home": {
+        "title": "StaticPages",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new StaticPage",
+        "createOrEditLabel": "Create or edit a StaticPage",
+        "notFound": "No StaticPages found"
+      },
+      "created": "A new StaticPage is created with identifier {{ param }}",
+      "updated": "A StaticPage is updated with identifier {{ param }}",
+      "deleted": "A StaticPage is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete StaticPage {{ id }}?"
+      },
+      "detail": {
+        "title": "StaticPage"
+      },
+      "id": "Id",
+      "title": "Title",
+      "content": "Content",
+      "status": "Status",
+      "category": "Category",
+      "help": {
+        "title": "Title",
+        "content": "Content",
+        "status": "Status",
+        "category": "Category"
+      }
+    }
+  }
+}
