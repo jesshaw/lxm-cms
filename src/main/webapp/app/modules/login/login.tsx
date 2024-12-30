@@ -32,7 +32,7 @@ export const Login = () => {
   searchParams.delete('r');
 
   if (isAuthenticated) {
-    return <Navigate to={{ pathname: redirectUrl ?? '/', search: `?${searchParams.toString()}` }} replace />;
+    return <Navigate to={{ pathname: redirectUrl ?? '/dashboard', search: `?${searchParams.toString()}` }} replace />;
   }
   return (
     <FullPageLayout>

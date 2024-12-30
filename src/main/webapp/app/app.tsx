@@ -105,6 +105,8 @@ export const App = () => {
   }, [mobileLayoutActivated]);
 
   const paddingTop = '60px';
+
+  console.log(resources);
   return (
     <BrowserRouter basename={baseHref}>
       <ThemeProvider>

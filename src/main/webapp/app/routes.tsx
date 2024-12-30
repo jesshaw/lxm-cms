@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Navigate, Route } from 'react-router-dom';
 import Loadable from 'react-loadable';
 
 import Login from 'app/modules/login/login';
@@ -15,6 +15,7 @@ import PrivateRoute from 'app/shared/auth/private-route';
 import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
 import PageNotFound from 'app/shared/error/page-not-found';
 import { AUTHORITIES } from 'app/config/constants';
+import ExternalRoutes from './external/external-routes';
 
 const loading = <div>loading ...</div>;
 
@@ -31,8 +32,11 @@ const AppRoutes = () => {
   return (
     <div className="view-routes">
       <ErrorBoundaryRoutes>
+        <Route index element={<Navigate to="external/" />} />
+        <Route path="external/*" element={<ExternalRoutes />} />
+
         <Route
-          index
+          path="dashboard"
           element={
             <PrivateRoute hasAnyAuthorities={[AUTHORITIES.USER]}>
               <Home />

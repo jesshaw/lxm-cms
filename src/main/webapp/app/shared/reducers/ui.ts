@@ -23,10 +23,10 @@ export type UIState = Readonly<typeof initialState>;
 
 export const MenuItemsData = {
   ...EntitiesMenuData,
-  homeMenuItem: { icon: 'pi pi-home', labelKey: 'global.menu.home', url: '/' }, // label为空不显示文本显示图片
+  homeMenuItem: { icon: 'pi pi-home', labelKey: 'global.menu.home', url: '/dashboard' }, // label为空不显示文本显示图片
   dashboardMenuItem: { label: 'DASHBOARDS', labelKey: 'global.menu.dashboards.title' },
   ecommerceMenuItem: { label: 'E-Commerce', labelKey: 'global.menu.dashboards.ecommerce', url: '/e-commerce' },
-  bankingMenuItem: { label: 'Banking', labelKey: 'global.menu.dashboards.banking', url: '/' },
+  bankingMenuItem: { label: 'Banking', labelKey: 'global.menu.dashboards.banking', url: '/dashboard' },
 
   accountMenuItem: { label: 'Account', labelKey: 'global.menu.account.main' },
   settingsMenuItem: { label: 'Settings', labelKey: 'global.menu.account.settings', url: '/account/settings' },

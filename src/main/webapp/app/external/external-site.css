@@ -1,0 +1,7 @@
+#external-site {
+  @apply min-h-screen;
+}
+
+.custom-menubar {
+  @apply w-full;
+}
