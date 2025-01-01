@@ -1,11 +1,18 @@
-id;name;content_type;sort
-1;gee;fooey;14801
-2;whenever;可 挖 比较;15397
-3;ugh;columnist;20980
-4;oak of 画;坐;19596
-5;crystallography;硬 who 走;22664
-6;once 稍微 绿;near whenever success;6463
-7;gosh;抱;31721
-8;during 推 粗;ah pro;14840
-9;siege eek 依然;yin;25338
-10;amidst above;捣;17833
+id;name;content_type;sort;parent_id
+1;服务与方案;page;1000;
+2;案例展示;page;2000;
+3;资源;page;3000;
+4;公司;page;4000;
+5;合规;page;5000;
+6;管理后台;page;7000;
+7;门户网站;page;2100;2
+8;企业数字化;page;2200;2
+9;乐香喵CRM;page;2210;8
+10;关于我们;page;4100;4
+11;新闻动态;post;4200;4
+12;投资者关系;page;4300;4
+13;招聘;page;4400;4
+14;品牌政策;page;5100;5
+15;隐私政策;page;5200;5
+16;服务条款;page;5300;5
+17;登录;page;7100;6

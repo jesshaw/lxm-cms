@@ -27,7 +27,7 @@ function transformToMenuItems(categories: ICategory[]): MenuItem[] {
       idMap.set(category.id, {
         label: category.name ?? '',
         command: () => {
-          navigate(`/external/page/${category.id}`);
+          navigate(`/external/${category.contentType}/${category.id}`);
         },
         // items: [], // 确保 items 是 MenuItem[] 类型
       });
@@ -44,6 +44,7 @@ function transformToMenuItems(categories: ICategory[]): MenuItem[] {
         parentMenuItem.items = parentMenuItem.items || [];
         // parentMenuItem.items.push(menuItem);
         (parentMenuItem.items as MenuItem[]).push(menuItem);
+        parentMenuItem.command = null;
       }
     } else if (menuItem) {
       // If no parent, it's a root item
