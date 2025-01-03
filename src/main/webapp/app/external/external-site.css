@@ -1,3 +1,7 @@
+.full-page-layout {
+  @apply animate-fade-in;
+}
+
 #external-site {
   @apply min-h-screen;
 }

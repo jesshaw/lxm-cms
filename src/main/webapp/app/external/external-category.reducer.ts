@@ -17,13 +17,13 @@ const apiUrl = 'api/external/categories';
 
 // Actions
 
-export const getEntities = createAsyncThunk('externalCategory/fetch_entity_list', async ({ query, sort }: IQueryParams) => {
+export const getEntities = createAsyncThunk('external/category/fetch_entity_list', async ({ query, sort }: IQueryParams) => {
   const requestUrl = `${apiUrl}?${query ? `${query}&` : ''}${sort ? `sort=${sort}&` : ''}cacheBuster=${new Date().getTime()}`;
   return axios.get<ICategory[]>(requestUrl);
 });
 
 export const getEntity = createAsyncThunk(
-  'externalCategory/fetch_entity',
+  'external/category/fetch_entity',
   async (id: string | number) => {
     const requestUrl = `${apiUrl}/${id}`;
     return axios.get<ICategory>(requestUrl);

@@ -17,13 +17,13 @@ export default () => {
       <ErrorBoundaryRoutes>
         <Route index element={<ExternalHome />} />
         <Route path="page">
-          <Route path=":cat">
+          <Route path=":cid">
             <Route index element={<ExternalStaticPage />} />
             <Route path=":id" element={<ExternalStaticPageDetail />} />
           </Route>
         </Route>
         <Route path="post">
-          <Route path=":cat">
+          <Route path=":cid">
             <Route index element={<ExternalPost />} />
             <Route path=":id" element={<ExternalPostDetail />} />
           </Route>
