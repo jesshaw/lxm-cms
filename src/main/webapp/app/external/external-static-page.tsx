@@ -9,6 +9,8 @@ import { ITEMS_PER_PAGE, SORT } from 'app/shared/util/pagination.constants';
 import { DataView, DataViewPageEvent } from 'primereact/dataview';
 import { IPost, defaultValue } from 'app/shared/model/post.model';
 import { classNames } from 'primereact/utils';
+import { Menu } from 'primereact/menu';
+import { MenuItem } from 'primereact/menuitem';
 
 const ExternalStaticPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -16,6 +18,8 @@ const ExternalStaticPage: React.FC = () => {
   const pageLocation = useLocation();
 
   const { cid } = useParams<'cid'>();
+
+  const categories = useAppSelector(state => state.externalCategory.entities);
 
   const entities = useAppSelector(state => state.externalStaticPage.entities);
   const loading = useAppSelector(state => state.externalStaticPage.loading);
@@ -54,6 +58,7 @@ const ExternalStaticPage: React.FC = () => {
 
   useEffect(() => {
     console.log(cid);
+    console.log(categories);
     getAllEntities();
   }, [cid]);
 
@@ -65,7 +70,9 @@ const ExternalStaticPage: React.FC = () => {
 
   return (
     <FullPageLayout>
-      <div>多静态页</div>
+      <div>
+        <div>多静态页</div>
+      </div>
     </FullPageLayout>
   );
 };

@@ -8,6 +8,9 @@ import { TriStateCheckbox } from 'primereact/tristatecheckbox';
 import { Slider } from 'primereact/slider';
 import { Button } from 'reactstrap';
 import { ColumnProps } from 'primereact/column';
+import { ICategory } from '../model/category.model';
+import { MenuItem } from 'primereact/menuitem';
+import { useNavigate } from 'react-router';
 
 export interface LxmColumnProps extends ColumnProps {
   headerKey?: string; // for translate
@@ -144,4 +147,144 @@ const percentFilterTemplate = options => {
       </div>
     </React.Fragment>
   );
+};
+
+export const transformToMenuItems = (categories: ICategory[]): MenuItem[] => {
+  // categories.sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0));
+  const sortedCategories = [...categories].sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0));
+
+  const navigate = useNavigate();
+  const idMap: Map<number, MenuItem> = new Map();
+  const rootItems: MenuItem[] = [];
+  rootItems.push({
+    id: '0',
+    label: '首页',
+    icon: 'pi pi-home',
+    command: () => {
+      navigate('/external');
+    },
+  });
+
+  // Step 1: Initialize map with MenuItem for each ICategory
+  sortedCategories.forEach(category => {
+    if (category.id !== undefined) {
+      idMap.set(category.id, {
+        id: category.id.toString(),
+        label: category.name ?? '',
+        command: () => {
+          navigate(`/external/${category.contentType}/${category.id}`);
+        },
+        // items: [], // 确保 items 是 MenuItem[] 类型
+      });
+    }
+  });
+
+  // Step 2: Build tree structure
+  sortedCategories.forEach(category => {
+    const menuItem = idMap.get(category.id!);
+    if (menuItem && category.parent?.id) {
+      const parentMenuItem = idMap.get(category.parent.id);
+      if (parentMenuItem) {
+        // 确保 items 是数组类型
+        parentMenuItem.items = parentMenuItem.items || [];
+        // parentMenuItem.items.push(menuItem);
+        (parentMenuItem.items as MenuItem[]).push(menuItem);
+        parentMenuItem.command = null;
+      }
+    } else if (menuItem) {
+      // If no parent, it's a root item
+      rootItems.push(menuItem);
+    }
+  });
+
+  return rootItems;
+};
+
+/**
+ * 根据 id 获取所在层级的第二层菜单及其子菜单
+ * @param menuItems 菜单项数组
+ * @param id 目标菜单项的 id
+ * @returns 第二层菜单及其子菜单，若未找到返回 null
+ */
+export const getSecondLevelMenu = (categories: ICategory[], id: string): MenuItem[] | null => {
+  let secondLevelMenu: MenuItem[] | null = null;
+  if (categories == null) return secondLevelMenu;
+  const menuItems = transformToMenuItems(categories);
+
+  function findParentMenu(items: MenuItem[], level: number, parent?: MenuItem): boolean {
+    for (const item of items) {
+      if (item.id === id) {
+        // 如果当前层级为第三层或更深层级，返回到第二层的父菜单
+        if (level >= 2 && parent) {
+          secondLevelMenu = (parent.items as MenuItem[]) || null;
+        } else if (level === 1) {
+          secondLevelMenu = items;
+        }
+        return true;
+      }
+
+      if (item.items) {
+        const foundInSubmenu = findParentMenu(item.items as MenuItem[], level + 1, item);
+        if (foundInSubmenu) {
+          // 如果当前项是目标项的父项，并且是第二层，返回其子菜单
+          if (level === 1 && parent) {
+            secondLevelMenu = (parent.items as MenuItem[]) || null;
+          }
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  // 从根层级（0层）开始查找
+  findParentMenu(menuItems, 0);
+  return secondLevelMenu;
+};
+
+// 递归渲染菜单项，并添加点击事件
+export const renderMenuItems = (items: MenuItem[], selectedId: string): MenuItem[] =>
+  items?.map(item => ({
+    ...item,
+    className: item.id == selectedId ? 'selected-menu-item' : '',
+    items: item.items ? renderMenuItems(item.items as MenuItem[], selectedId) : undefined,
+  }));
+
+/**
+ * 根据 id 查找从自身到最上层的所有节点
+ * @param menuItems 菜单项数组
+ * @param id 目标菜单项的 id
+ * @returns 包含从自身到最上层的所有节点数组
+ */
+export const findPathToRoot = (categories: ICategory[], id: string): MenuItem[] => {
+  let path: MenuItem[] = [];
+  const menuItems: MenuItem[] = transformToMenuItems(categories);
+  if (menuItems == null) return path;
+
+  function findMenu(items: MenuItem[], currentPath: MenuItem[]): boolean {
+    for (const item of items) {
+      // 将当前节点加入路径
+      currentPath.push(item);
+
+      if (item.id === id) {
+        path = [...currentPath]; // 找到目标节点时记录路径
+        return true;
+      }
+
+      if (item.items) {
+        // 深度优先搜索子菜单
+        const foundInSubmenu = findMenu(item.items as MenuItem[], currentPath);
+        if (foundInSubmenu) {
+          return true;
+        }
+      }
+
+      // 当前节点不在路径上，移除
+      currentPath.pop();
+    }
+    return false;
+  }
+
+  findMenu(menuItems, []);
+  return path;
 };

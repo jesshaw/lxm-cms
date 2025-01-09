@@ -2,6 +2,7 @@ import './external-site.css';
 
 import React from 'react';
 import { Route } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import ErrorBoundaryRoutes from 'app/shared/error/error-boundary-routes';
 import ExternalNavbar from './external-navbar';
 import ExternalStaticPage from './external-static-page';

@@ -9,3 +9,7 @@
 .custom-menubar {
   @apply w-full;
 }
+
+.selected-menu-item {
+  @apply bg-lxm-highlight-bg;
+}
