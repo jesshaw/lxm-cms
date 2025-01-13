@@ -13,7 +13,7 @@ import ExternalHome from './external-home';
 
 export default () => {
   return (
-    <div id="external-site">
+    <div id="l-site">
       <ExternalNavbar />
       <ErrorBoundaryRoutes>
         <Route index element={<ExternalHome />} />
@@ -31,7 +31,7 @@ export default () => {
         </Route>
       </ErrorBoundaryRoutes>
 
-      <div>页脚</div>
+      <div className="l-site-footer">乐香喵版权所有 © 2025</div>
     </div>
   );
 };

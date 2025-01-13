@@ -17,7 +17,7 @@ const ExternalNavbar: React.FC = () => {
   const navigate = useNavigate();
 
   const categories: ICategory[] = useAppSelector(state => state.externalCategory.entities);
-  const defaultItems: MenuItem[] = transformToMenuItems(categories);
+  const defaultItems: MenuItem[] = transformToMenuItems(categories, navigate);
 
   useEffect(() => {
     getAllEntities();
@@ -34,8 +34,8 @@ const ExternalNavbar: React.FC = () => {
 
   const end = <></>;
   return (
-    <div>
-      <Menubar className="custom-menubar" model={defaultItems} start={start} end={end} />
+    <div className="l-site-nav">
+      <Menubar className="custom-menubar" model={defaultItems} start={start} />
     </div>
   );
 };

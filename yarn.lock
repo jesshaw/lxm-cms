@@ -6042,10 +6042,10 @@ functions-have-names@^1.2.3:
   resolved "https://registry.npmmirror.com/functions-have-names/-/functions-have-names-1.2.3.tgz"
   integrity sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
 
-generator-jhipster-chimera@1.4.3:
-  version "1.4.3"
-  resolved "https://registry.npmmirror.com/generator-jhipster-chimera/-/generator-jhipster-chimera-1.4.3.tgz"
-  integrity sha512-BBrF3pTTqAHJWQRWpan56ZQy4QwvPyQPsTcWjih3vsSfG4Nm7/Qv9eoQauUY7qMTBFO016UpyxuvwxKx0JOUwg==
+generator-jhipster-chimera@1.4.4:
+  version "1.4.4"
+  resolved "https://registry.npmmirror.com/generator-jhipster-chimera/-/generator-jhipster-chimera-1.4.4.tgz"
+  integrity sha512-teWhZkaWW3Ob14S3DtxiEDuS20L/QJ34NHY+bEs56nh+miwm4b4RH86FvquT+X3MnOtoH26WQBQe92fgaE0BxA==
   dependencies:
     generator-jhipster "8.3.0"
 

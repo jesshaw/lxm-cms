@@ -149,11 +149,11 @@ const percentFilterTemplate = options => {
   );
 };
 
-export const transformToMenuItems = (categories: ICategory[]): MenuItem[] => {
+export const transformToMenuItems = (categories: ICategory[], navigate: Function): MenuItem[] => {
   // categories.sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0));
   const sortedCategories = [...categories].sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0));
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const idMap: Map<number, MenuItem> = new Map();
   const rootItems: MenuItem[] = [];
   rootItems.push({
@@ -206,10 +206,10 @@ export const transformToMenuItems = (categories: ICategory[]): MenuItem[] => {
  * @param id 目标菜单项的 id
  * @returns 第二层菜单及其子菜单，若未找到返回 null
  */
-export const getSecondLevelMenu = (categories: ICategory[], id: string): MenuItem[] | null => {
+export const getSecondLevelMenu = (categories: ICategory[], id: string, navigate: Function): MenuItem[] | null => {
   let secondLevelMenu: MenuItem[] | null = null;
   if (categories == null) return secondLevelMenu;
-  const menuItems = transformToMenuItems(categories);
+  const menuItems = transformToMenuItems(categories, navigate);
 
   function findParentMenu(items: MenuItem[], level: number, parent?: MenuItem): boolean {
     for (const item of items) {
@@ -256,9 +256,9 @@ export const renderMenuItems = (items: MenuItem[], selectedId: string): MenuItem
  * @param id 目标菜单项的 id
  * @returns 包含从自身到最上层的所有节点数组
  */
-export const findPathToRoot = (categories: ICategory[], id: string): MenuItem[] => {
+export const findPathToRoot = (categories: ICategory[], id: string, navigate: Function): MenuItem[] => {
   let path: MenuItem[] = [];
-  const menuItems: MenuItem[] = transformToMenuItems(categories);
+  const menuItems: MenuItem[] = transformToMenuItems(categories, navigate);
   if (menuItems == null) return path;
 
   function findMenu(items: MenuItem[], currentPath: MenuItem[]): boolean {
@@ -287,4 +287,13 @@ export const findPathToRoot = (categories: ICategory[], id: string): MenuItem[] 
 
   findMenu(menuItems, []);
   return path;
+};
+
+export const homeMenuItem = (navigate: Function): MenuItem => {
+  return {
+    icon: 'pi pi-home',
+    command: () => {
+      navigate('/external');
+    },
+  };
 };

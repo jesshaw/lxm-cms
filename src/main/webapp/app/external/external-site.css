@@ -2,14 +2,57 @@
   @apply animate-fade-in;
 }
 
-#external-site {
+.full-page-layout .layout-content-wrapper {
+  @apply p-0;
+}
+
+/* 外网页 */
+#l-site {
   @apply min-h-screen;
+}
+
+#l-site > div {
+  @apply mx-0 px-2 md:px-16 lg:px-36;
+}
+
+/* 导航 */
+#l-site .l-site-nav {
+  @apply bg-lxm-surface-border mx-0 px-2 md:px-16 lg:px-36;
 }
 
 .custom-menubar {
   @apply w-full;
 }
+.custom-menubar .p-menubar-root-list {
+  @apply ml-auto;
+}
+.custom-menubar .p-menubar-button {
+  @apply ml-auto;
+}
 
-.selected-menu-item {
-  @apply bg-lxm-highlight-bg;
+/* .custom-menubar .p-menubar-end {
+  @apply hidden;
+} */
+
+/* 访问路径 */
+.l-site-path {
+}
+
+.l-site-body {
+  @apply flex;
+}
+
+/* 边栏 */
+.l-site-sidebar {
+  @apply flex-none w-56 max-sm:hidden;
+}
+
+/* 内容 */
+.l-site-content {
+  @apply grow;
+}
+
+/* 页脚 */
+#l-site .l-site-footer {
+  @apply bg-lxm-surface-border mx-0 px-2 md:px-16 lg:px-36;
 }

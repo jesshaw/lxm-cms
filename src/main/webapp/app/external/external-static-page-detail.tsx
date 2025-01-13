@@ -6,7 +6,7 @@ import { getEntity } from './external-static-page.reducer';
 import { Menu } from 'primereact/menu';
 import { MenuItem } from 'primereact/menuitem';
 import { BreadCrumb } from 'primereact/breadcrumb';
-import { findPathToRoot, getSecondLevelMenu, renderMenuItems } from 'app/shared/util/lxm-utils';
+import { findPathToRoot, getSecondLevelMenu, homeMenuItem, renderMenuItems } from 'app/shared/util/lxm-utils';
 import { ICategory } from 'app/shared/model/category.model';
 
 const ExternalStaticPageDetail: React.FC = () => {
@@ -23,33 +23,28 @@ const ExternalStaticPageDetail: React.FC = () => {
   const loading = useAppSelector(state => state.externalStaticPage.loading);
 
   const categories: ICategory[] = useAppSelector(state => state.externalCategory.entities);
-
-  const items: MenuItem[] = getSecondLevelMenu(categories, cid);
-
-  const breadItems: MenuItem[] = findPathToRoot(categories, cid);
-  const home: MenuItem = {
-    icon: 'pi pi-home',
-    command: () => {
-      navigate('/external/');
-    },
-  };
+  const items: MenuItem[] = getSecondLevelMenu(categories, cid, navigate);
+  const breadItems: MenuItem[] = findPathToRoot(categories, cid, navigate);
 
   return (
     <FullPageLayout>
       <div>
-        <BreadCrumb model={breadItems} home={home} />
+        <BreadCrumb model={breadItems} home={homeMenuItem(navigate)} />
       </div>
-      <div>
-        <div className="">
-          <Menu model={renderMenuItems(items, cid)} />
-        </div>
-        {/* <div>四级菜单</div> */}
-        {!loading && (
-          <div>
-            <div>{entity.title}</div>
-            <div>{entity.content}</div>
+      <div className="l-site-body">
+        {items && (
+          <div className="l-site-sidebar">
+            <Menu model={renderMenuItems(items, cid)} />
           </div>
         )}
+        <div className="l-site-content">
+          {!loading && (
+            <>
+              <h1>{entity.title}</h1>
+              <div>{entity.content}</div>
+            </>
+          )}
+        </div>
       </div>
     </FullPageLayout>
   );

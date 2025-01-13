@@ -11,6 +11,9 @@ import { IPost, defaultValue } from 'app/shared/model/post.model';
 import { classNames } from 'primereact/utils';
 import { Menu } from 'primereact/menu';
 import { MenuItem } from 'primereact/menuitem';
+import { BreadCrumb } from 'primereact/breadcrumb';
+import { findPathToRoot, getSecondLevelMenu, homeMenuItem, renderMenuItems } from 'app/shared/util/lxm-utils';
+import { ICategory } from 'app/shared/model/category.model';
 
 const ExternalStaticPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -19,7 +22,9 @@ const ExternalStaticPage: React.FC = () => {
 
   const { cid } = useParams<'cid'>();
 
-  const categories = useAppSelector(state => state.externalCategory.entities);
+  const categories: ICategory[] = useAppSelector(state => state.externalCategory.entities);
+  const items: MenuItem[] = getSecondLevelMenu(categories, cid, navigate);
+  const breadItems: MenuItem[] = findPathToRoot(categories, cid, navigate);
 
   const entities = useAppSelector(state => state.externalStaticPage.entities);
   const loading = useAppSelector(state => state.externalStaticPage.loading);
@@ -71,7 +76,15 @@ const ExternalStaticPage: React.FC = () => {
   return (
     <FullPageLayout>
       <div>
-        <div>多静态页</div>
+        <BreadCrumb model={breadItems} home={homeMenuItem(navigate)} />
+      </div>
+      <div className="l-site-body">
+        {items && (
+          <div className="l-site-sidebar">
+            <Menu model={renderMenuItems(items, cid)} />
+          </div>
+        )}
+        <div className="l-site-content">未配置内容页</div>
       </div>
     </FullPageLayout>
   );

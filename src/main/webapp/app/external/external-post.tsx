@@ -9,6 +9,11 @@ import { ITEMS_PER_PAGE, SORT } from 'app/shared/util/pagination.constants';
 import { DataView, DataViewPageEvent } from 'primereact/dataview';
 import { IPost, defaultValue } from 'app/shared/model/post.model';
 import { classNames } from 'primereact/utils';
+import { BreadCrumb } from 'primereact/breadcrumb';
+import { ICategory } from 'app/shared/model/category.model';
+import { MenuItem } from 'primereact/menuitem';
+import { findPathToRoot, getSecondLevelMenu, homeMenuItem, renderMenuItems } from 'app/shared/util/lxm-utils';
+import { Menu } from 'primereact/menu';
 
 const ExternalPost: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -17,11 +22,15 @@ const ExternalPost: React.FC = () => {
 
   const { cid } = useParams<'cid'>();
 
+  const categories: ICategory[] = useAppSelector(state => state.externalCategory.entities);
+  const items: MenuItem[] = getSecondLevelMenu(categories, cid, navigate);
+  const breadItems: MenuItem[] = findPathToRoot(categories, cid, navigate);
+
   const postList = useAppSelector(state => state.externalPost.entities);
   const loading = useAppSelector(state => state.externalPost.loading);
   const totalItems = useAppSelector(state => state.externalPost.totalItems);
   const [paginationState, setPaginationState] = useState(
-    overridePaginationStateWithQueryParams(getPaginationState(pageLocation, 2, 'id'), pageLocation.search),
+    overridePaginationStateWithQueryParams(getPaginationState(pageLocation, 5, 'id'), pageLocation.search),
   );
 
   const getAllEntities = () => {
@@ -108,10 +117,16 @@ const ExternalPost: React.FC = () => {
 
   return (
     <FullPageLayout>
-      <div>导航</div>
       <div>
-        <div>多新闻列表</div>
-        <div className="l-card">
+        <BreadCrumb model={breadItems} home={homeMenuItem(navigate)} />
+      </div>
+      <div className="l-site-body">
+        {items && (
+          <div className="l-site-sidebar">
+            <Menu model={renderMenuItems(items, cid)} />
+          </div>
+        )}
+        <div className="l-site-content">
           <DataView
             value={postList}
             itemTemplate={itemTemplate}
