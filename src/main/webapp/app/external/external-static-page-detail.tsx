@@ -41,7 +41,7 @@ const ExternalStaticPageDetail: React.FC = () => {
           {!loading && (
             <>
               <h1>{entity.title}</h1>
-              <div>{entity.content}</div>
+              <div dangerouslySetInnerHTML={{ __html: entity.content }} />
             </>
           )}
         </div>

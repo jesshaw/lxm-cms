@@ -31,7 +31,9 @@ export default () => {
         </Route>
       </ErrorBoundaryRoutes>
 
-      <div className="l-site-footer">乐香喵版权所有 © 2025</div>
+      <div className="l-site-footer">
+        <div>乐香喵版权所有 © 2025</div>
+      </div>
     </div>
   );
 };

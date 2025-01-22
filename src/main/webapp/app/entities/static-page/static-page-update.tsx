@@ -22,6 +22,7 @@ import { ICategory } from 'app/shared/model/category.model';
 import { getEntities as getCategories } from 'app/entities/category/category.reducer';
 import { IStaticPage, defaultValue } from 'app/shared/model/static-page.model';
 import { getEntity, updateEntity, createEntity, reset as resetEntity } from './static-page.reducer';
+import { Editor, EditorTextChangeEvent } from 'primereact/editor';
 
 export const StaticPageUpdate = () => {
   const dispatch = useAppDispatch();
@@ -88,6 +89,54 @@ export const StaticPageUpdate = () => {
   const getFormErrorMessage = name => {
     return errors[name] && <small className="p-error">{errors[name].message}</small>;
   };
+
+  const header = (
+    <>
+      <span className="ql-formats">
+        {/* <select className="ql-font"></select> */}
+        <select className="ql-size"></select>
+      </span>
+      <span className="ql-formats">
+        <button className="ql-bold"></button>
+        <button className="ql-italic"></button>
+        <button className="ql-underline"></button>
+        <button className="ql-strike"></button>
+      </span>
+      <span className="ql-formats">
+        <select className="ql-color"></select>
+        <select className="ql-background"></select>
+      </span>
+      <span className="ql-formats">
+        <button className="ql-script" value="sub"></button>
+        <button className="ql-script" value="super"></button>
+      </span>
+      <span className="ql-formats">
+        <button className="ql-header" value="1"></button>
+        <button className="ql-header" value="2"></button>
+        <button className="ql-blockquote"></button>
+        <button className="ql-code-block"></button>
+      </span>
+      <span className="ql-formats">
+        <button className="ql-list" value="ordered"></button>
+        <button className="ql-list" value="bullet"></button>
+        <button className="ql-indent" value="-1"></button>
+        <button className="ql-indent" value="+1"></button>
+      </span>
+      <span className="ql-formats">
+        <button className="ql-direction" value="rtl"></button>
+        <select className="ql-align"></select>
+      </span>
+      <span className="ql-formats">
+        <button className="ql-link"></button>
+        <button className="ql-image"></button>
+        <button className="ql-video"></button>
+        <button className="ql-formula"></button>
+      </span>
+      <span className="ql-formats">
+        <button className="ql-clean"></button>
+      </span>
+    </>
+  );
 
   return (
     <div className="l-card">
@@ -156,19 +205,25 @@ export const StaticPageUpdate = () => {
                     control={control}
                     name="content"
                     render={({ field, fieldState }) => (
-                      <InputTextarea
-                        id={field.name}
-                        {...field}
+                      // <InputTextarea
+                      //   id={field.name}
+                      //   {...field}
+                      //   value={field.value ? field.value : ''}
+                      //   rows={5}
+                      //   onBlur={() => {
+                      //     trigger('content');
+                      //   }}
+                      //   className={classNames({
+                      //     'p-invalid': fieldState.invalid,
+                      //   })}
+                      //   tooltipOptions={{ position: 'top' }}
+                      //   tooltip={translate('lxmcmsApp.staticPage.help.content')}
+                      // />
+                      <Editor
                         value={field.value ? field.value : ''}
-                        rows={5}
-                        onBlur={() => {
-                          trigger('content');
-                        }}
-                        className={classNames({
-                          'p-invalid': fieldState.invalid,
-                        })}
-                        tooltipOptions={{ position: 'top' }}
-                        tooltip={translate('lxmcmsApp.staticPage.help.content')}
+                        onTextChange={(e: EditorTextChangeEvent) => field.onChange(e.htmlValue)}
+                        style={{ height: '320px' }}
+                        headerTemplate={header}
                       />
                     )}
                   />
